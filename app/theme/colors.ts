@@ -66,4 +66,8 @@ export const colors = {
      * The default color of success text, icons and indicators.
      */
     success: palette.secondary900,
+    /**
+     * The default tint color of icons.
+     */
+    icon: palette.neutral600,
 }
