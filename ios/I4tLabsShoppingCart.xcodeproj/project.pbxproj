@@ -12,8 +12,19 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		219A47C327604314AADC25A3 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0914D9AE78CB445EBD9C2B7D /* NotoSans-Bold.ttf */; };
+		385DD383E7B1473CBDF4C70D /* NotoSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C43F8C7D55E4E4EBEBE478E /* NotoSans-SemiBold.ttf */; };
+		3F45DF6C9B0B4B9F8E3A090D /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74E2BB6CEE164E959486541F /* NotoSans-Regular.ttf */; };
+		410517CE08F44287835B7F93 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3620804704BD4A70A181D457 /* NotoSans-Medium.ttf */; };
+		6FBC1FBA2A8B4DF8B0A2C317 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1381A3F8278245DBBB8FBD87 /* Roboto-Bold.ttf */; };
+		73E783E9041E44BE880B8A82 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA1B4A601A5144FF93F44ACF /* Roboto-Regular.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8DC0C9F113BF4F0097973E97 /* NotoSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BF47592593449F7BA54E59C /* NotoSans-Light.ttf */; };
+		9072FF8E94BE48B39CBAEDE2 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A1FA9DE765364C52BB52D743 /* Roboto-Thin.ttf */; };
+		E416FE8BB6514596A30D0566 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD86DEC1FDF1458F98CEB369 /* Roboto-Light.ttf */; };
+		EA8BC48074D54104A51E4DBB /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B33C7F446E564726A6A9A2A7 /* Roboto-Medium.ttf */; };
+		F36D8CA7CC4846A1A1EFE231 /* NotoSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E65665DD7A2E462B8F9E24C6 /* NotoSans-Thin.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +41,8 @@
 		00E356EE1AD99517003FC87E /* I4tLabsShoppingCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = I4tLabsShoppingCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* I4tLabsShoppingCartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = I4tLabsShoppingCartTests.m; sourceTree = "<group>"; };
+		0914D9AE78CB445EBD9C2B7D /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Bold.ttf"; path = "../assets/fonts/NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		1381A3F8278245DBBB8FBD87 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* I4tLabsShoppingCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = I4tLabsShoppingCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = I4tLabsShoppingCart/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = I4tLabsShoppingCart/AppDelegate.mm; sourceTree = "<group>"; };
@@ -37,12 +50,21 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = I4tLabsShoppingCart/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = I4tLabsShoppingCart/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3620804704BD4A70A181D457 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Medium.ttf"; path = "../assets/fonts/NotoSans-Medium.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-I4tLabsShoppingCart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-I4tLabsShoppingCart.debug.xcconfig"; path = "Target Support Files/Pods-I4tLabsShoppingCart/Pods-I4tLabsShoppingCart.debug.xcconfig"; sourceTree = "<group>"; };
+		4BF47592593449F7BA54E59C /* NotoSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Light.ttf"; path = "../assets/fonts/NotoSans-Light.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-I4tLabsShoppingCart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-I4tLabsShoppingCart.release.xcconfig"; path = "Target Support Files/Pods-I4tLabsShoppingCart/Pods-I4tLabsShoppingCart.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.debug.xcconfig"; path = "Target Support Files/Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests/Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5C43F8C7D55E4E4EBEBE478E /* NotoSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-SemiBold.ttf"; path = "../assets/fonts/NotoSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-I4tLabsShoppingCart.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-I4tLabsShoppingCart.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E2BB6CEE164E959486541F /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Regular.ttf"; path = "../assets/fonts/NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = I4tLabsShoppingCart/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.release.xcconfig"; path = "Target Support Files/Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests/Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1FA9DE765364C52BB52D743 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		AA1B4A601A5144FF93F44ACF /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		AD86DEC1FDF1458F98CEB369 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		B33C7F446E564726A6A9A2A7 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		E65665DD7A2E462B8F9E24C6 /* NotoSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "NotoSans-Thin.ttf"; path = "../assets/fonts/NotoSans-Thin.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -122,6 +144,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				C1F3C40610CD43E2AFC61947 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -146,6 +169,25 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-I4tLabsShoppingCart-I4tLabsShoppingCartTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C1F3C40610CD43E2AFC61947 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0914D9AE78CB445EBD9C2B7D /* NotoSans-Bold.ttf */,
+				4BF47592593449F7BA54E59C /* NotoSans-Light.ttf */,
+				3620804704BD4A70A181D457 /* NotoSans-Medium.ttf */,
+				74E2BB6CEE164E959486541F /* NotoSans-Regular.ttf */,
+				5C43F8C7D55E4E4EBEBE478E /* NotoSans-SemiBold.ttf */,
+				E65665DD7A2E462B8F9E24C6 /* NotoSans-Thin.ttf */,
+				1381A3F8278245DBBB8FBD87 /* Roboto-Bold.ttf */,
+				AD86DEC1FDF1458F98CEB369 /* Roboto-Light.ttf */,
+				B33C7F446E564726A6A9A2A7 /* Roboto-Medium.ttf */,
+				AA1B4A601A5144FF93F44ACF /* Roboto-Regular.ttf */,
+				A1FA9DE765364C52BB52D743 /* Roboto-Thin.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +286,17 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				219A47C327604314AADC25A3 /* NotoSans-Bold.ttf in Resources */,
+				8DC0C9F113BF4F0097973E97 /* NotoSans-Light.ttf in Resources */,
+				410517CE08F44287835B7F93 /* NotoSans-Medium.ttf in Resources */,
+				3F45DF6C9B0B4B9F8E3A090D /* NotoSans-Regular.ttf in Resources */,
+				385DD383E7B1473CBDF4C70D /* NotoSans-SemiBold.ttf in Resources */,
+				F36D8CA7CC4846A1A1EFE231 /* NotoSans-Thin.ttf in Resources */,
+				6FBC1FBA2A8B4DF8B0A2C317 /* Roboto-Bold.ttf in Resources */,
+				E416FE8BB6514596A30D0566 /* Roboto-Light.ttf in Resources */,
+				EA8BC48074D54104A51E4DBB /* Roboto-Medium.ttf in Resources */,
+				73E783E9041E44BE880B8A82 /* Roboto-Regular.ttf in Resources */,
+				9072FF8E94BE48B39CBAEDE2 /* Roboto-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
