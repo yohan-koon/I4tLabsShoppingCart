@@ -1,4 +1,4 @@
-import { VirtualizedList, StyleSheet, Text, View, ViewStyle, FlatList } from 'react-native'
+import { ViewStyle, FlatList } from 'react-native'
 import React from 'react'
 import { useReduxSelector } from '../redux';
 import { ProductItem, Spacer } from '../components';
