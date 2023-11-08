@@ -4,3 +4,5 @@ export * from './TextField';
 export * from './Screen';
 export * from './Spacer';
 export * from './Button';
+export * from './ProductItem';
+export * from './NetworkImage';

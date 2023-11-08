@@ -1,4 +1,6 @@
-export type UserType = {
+import { LoadingType } from "../../types";
+
+export type User = {
     id: number;
     username: string;
     email: string;
@@ -10,8 +12,8 @@ export type UserType = {
 };
 
 export type ISignInType = {
-    user: UserType | null;
-    loading: boolean;
+    user: User | null;
+    loading: LoadingType;
     error: string;
 }
 
