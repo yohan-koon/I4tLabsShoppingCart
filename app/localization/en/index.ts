@@ -4,11 +4,13 @@ import productsScreen from './products-screen';
 import cartScreen from './cart-screen';
 import profileScreen from './profile-screen';
 
-export default {
+const en = {
     common,
     loginScreen,
     productsScreen,
     cartScreen,
     profileScreen
-
 }
+
+export default en;
+export type Translations = typeof en
