@@ -8,7 +8,11 @@ export const HomeNavigator = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Products" component={ProductsScreen} />
-            <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
+            <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} options={{
+                headerShown: true,
+                headerTitle: '',
+                headerBackTitleVisible: false,
+            }} />
         </Stack.Navigator>
     )
 }

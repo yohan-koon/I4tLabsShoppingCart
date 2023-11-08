@@ -79,4 +79,6 @@ export const iconRegistry = {
     home: require('../../assets/icons/home.png'),
     profile: require('../../assets/icons/user.png'),
     cart: require('../../assets/icons/cart.png'),
+    next: require('../../assets/icons/next.png'),
+    prev: require('../../assets/icons/prev.png'),
 };
