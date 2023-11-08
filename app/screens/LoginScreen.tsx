@@ -3,10 +3,17 @@ import React, {useRef} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
-import {Button, Screen, Spacer, Text, TextField, TextFieldProps} from '../components';
-import { spacing } from '../theme';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
-import { getLoginFormValidationSchema } from '../validations';
+import {
+  Button,
+  Screen,
+  Spacer,
+  Text,
+  TextField,
+  TextFieldProps,
+} from '../components';
+import {spacing} from '../theme';
+import {get} from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import {getLoginFormValidationSchema} from '../validations';
 
 interface LoginFormValues {
   username: string;
@@ -14,7 +21,7 @@ interface LoginFormValues {
 }
 
 export const LoginScreen = () => {
-  const initialFormValues : LoginFormValues = {username: '', password: ''}
+  const initialFormValues: LoginFormValues = {username: '', password: ''};
   const passwordRef = useRef<TextInput>(null);
   const navigation = useNavigation();
   const {t} = useTranslation();
@@ -24,43 +31,67 @@ export const LoginScreen = () => {
    * @returns form of the screen
    */
   const renderForm = () => {
-    return (<Formik
-      initialValues={initialFormValues}
-      onSubmit={values => console.log(values)}
-      validationSchema={getLoginFormValidationSchema(t)}
-    >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors }) => (
-        <View style={$formContainer}>
-          <TextField
-            placeholderTx="loginScreen:usernamePlaceholder"
-            textContentType="username"
-            keyboardType="default"
-            returnKeyType="next"
-            onSubmitEditing={() => { passwordRef.current?.focus() }}
-            onChangeText={handleChange("username")}
-            onBlur={handleBlur("username")}
-            value={values.username}
-            helper={touched.username && errors.username ? errors.username : undefined}
-          />
-          <Spacer mainAxisSize={spacing.lg}/>
-          <TextField
-            ref={passwordRef}
-            placeholderTx="loginScreen:passwordPlaceholder"
-            secureTextEntry={true}
-            textContentType="password"
-            returnKeyType="done"
-            onSubmitEditing={() => { handleSubmit() }}
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
-            helper={touched.password && errors.password ? errors.password : undefined}
-          />
-          <Spacer mainAxisSize={spacing.xxl}/>
-          <Button tx="loginScreen:loginButton" onPress={()=> handleSubmit()} />
-        </View>
-      )}
-    </Formik>)
-  }
+    return (
+      <Formik
+        initialValues={initialFormValues}
+        onSubmit={values => console.log(values)}
+        validationSchema={getLoginFormValidationSchema(t)}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+        }) => (
+          <View style={$formContainer}>
+            <TextField
+              placeholderTx="loginScreen:usernamePlaceholder"
+              textContentType="username"
+              keyboardType="default"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordRef.current?.focus();
+              }}
+              onChangeText={handleChange('username')}
+              onBlur={handleBlur('username')}
+              value={values.username}
+              helper={
+                touched.username && errors.username
+                  ? errors.username
+                  : undefined
+              }
+            />
+            <Spacer mainAxisSize={spacing.lg} />
+            <TextField
+              ref={passwordRef}
+              placeholderTx="loginScreen:passwordPlaceholder"
+              secureTextEntry={true}
+              textContentType="password"
+              returnKeyType="done"
+              onSubmitEditing={() => {
+                handleSubmit();
+              }}
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              helper={
+                touched.password && errors.password
+                  ? errors.password
+                  : undefined
+              }
+            />
+            <Spacer mainAxisSize={spacing.xxl} />
+            <Button
+              tx="loginScreen:loginButton"
+              // onPress={() => handleSubmit()}
+              onPress={() => navigation.navigate('MainNav')}
+            />
+          </View>
+        )}
+      </Formik>
+    );
+  };
 
   /**
    * Renders content of the screen
@@ -69,8 +100,8 @@ export const LoginScreen = () => {
   const renderContent = () => {
     return (
       <>
-        <Text tx="loginScreen:title" preset='h2'/>
-        <Spacer mainAxisSize={spacing.xxxxl}/>
+        <Text tx="loginScreen:title" preset="h2" />
+        <Spacer mainAxisSize={spacing.xxxxl} />
         {renderForm()}
       </>
     );
@@ -96,4 +127,4 @@ const $contentContainer: ViewStyle = {
 
 const $formContainer: ViewStyle = {
   width: '100%',
-}
+};

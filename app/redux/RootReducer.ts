@@ -1,11 +1,11 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { cartSlice } from './CartSlice'
-import { productsSlice } from './ProductsSlice'
+import { productsSlice } from './products/slice'
 import { authSlice } from './auth/slice'
 
 const rootReducer = combineReducers({
     auth: authSlice.reducer,
-    prducts: productsSlice.reducer,
+    products: productsSlice.reducer,
     cart: cartSlice.reducer,
 })
   
