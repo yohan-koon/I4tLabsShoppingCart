@@ -12,7 +12,7 @@ export const RootNavigator = () => {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false, navigationBarColor: colors.background}}>
                 <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Main" component={MainNavigator} />
+                <Stack.Screen name="MainNav" component={MainNavigator} />
             </Stack.Navigator>
         </NavigationContainer>
     )
