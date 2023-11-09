@@ -16,11 +16,13 @@ import {
 } from '../components';
 import { ImageStyle } from 'react-native-fast-image';
 import { colors, spacing } from '../theme';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { HomeNavigatorParamList } from '../navigators';
+import { Product } from '../redux/products/types';
 
 export const ProductDetailsScreen = () => {
   const carouselRef = React.useRef(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<HomeNavigatorParamList>>();
   const {
     getProductById: { product },
   } = useReduxSelector(state => state.products);
@@ -34,23 +36,6 @@ export const ProductDetailsScreen = () => {
       onPress={() => navigation.goBack()}
     />)
   }, [quantity])
-
-  const renderItem = ({ item, index }) => {
-    return (
-      <View
-        style={{
-          backgroundColor: 'floralwhite',
-          borderRadius: 5,
-          height: 250,
-          padding: 50,
-          marginLeft: 25,
-          marginRight: 25,
-        }}>
-        <Text style={{ fontSize: 30 }}>{item.title}</Text>
-        <Text>{item.text}</Text>
-      </View>
-    );
-  };
 
   return (
     <Screen preset="auto" contentContainerStyle={$root}>
@@ -68,7 +53,7 @@ export const ProductDetailsScreen = () => {
           ref={carouselRef}
           data={product?.images}
           renderItem={({ item }) => (
-            <NetworkImage source={item} style={$sliderItem} />
+            <NetworkImage source={{uri: item}} style={$sliderItem} />
           )}
           sliderWidth={ms(375 - 80)}
           itemWidth={ms(375 - 80)}

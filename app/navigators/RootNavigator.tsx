@@ -1,11 +1,16 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp } from '@react-navigation/native';
 import { LoginScreen } from '../screens';
 import { colors } from '../theme';
 import { MainNavigator } from './MainNavigator';
 
-const Stack = createNativeStackNavigator();
+export type RootNavigatorParamList = {
+    Login: undefined,
+    MainNav: undefined,
+}
+
+const Stack = createNativeStackNavigator<RootNavigatorParamList>();
 
 export const RootNavigator = () => {
     return (

@@ -7,7 +7,13 @@ import { ProfileNavigator } from './ProfileNavigator';
 import { Icon, IconTypes } from '../components';
 import { colors } from '../theme';
 
-const Tab = createBottomTabNavigator();
+export type MainNavigatorParamList = {
+    HomeNav: undefined,
+    CartNav: undefined,
+    ProfileNav: undefined,
+}
+
+const Tab = createBottomTabNavigator<MainNavigatorParamList>();
 
 export const MainNavigator = () => {
     const activeTintColor = colors.palette.primary900;
