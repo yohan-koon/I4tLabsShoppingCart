@@ -81,4 +81,12 @@ export const iconRegistry = {
     cart: require('../../assets/icons/cart.png'),
     next: require('../../assets/icons/next.png'),
     prev: require('../../assets/icons/prev.png'),
+    briefcase: require('../../assets/icons/briefcase.png'),
+    building: require('../../assets/icons/building.png'),
+    cake: require('../../assets/icons/cake.png'),
+    degreeCap: require('../../assets/icons/degree-cap.png'),
+    female: require('../../assets/icons/female.png'),
+    male: require('../../assets/icons/male.png'),
+    location: require('../../assets/icons/location.png'),
+    phone: require('../../assets/icons/phone.png'),
 };
