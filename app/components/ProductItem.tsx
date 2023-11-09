@@ -26,7 +26,7 @@ export const ProductItem = (props: ProductItemProps) => {
                 <Spacer mainAxisSize={spacing.xxs} />
                 <Text tx={product.description} numberOfLines={1} />
                 <Spacer mainAxisSize={spacing.xs} />
-                <NetworkImage source={product.thumbnail} style={$imageStyle} />
+                <NetworkImage source={{uri: product.thumbnail}} style={$imageStyle} />
             </View>
         </TouchableOpacity>
     )

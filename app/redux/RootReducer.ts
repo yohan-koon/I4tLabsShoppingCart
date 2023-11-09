@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { cartSlice } from './CartSlice'
+import { cartSlice } from './cart/slice'
 import { productsSlice } from './products/slice'
 import { authSlice } from './auth/slice'
 

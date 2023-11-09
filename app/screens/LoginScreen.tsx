@@ -1,6 +1,6 @@
 import {TextInput, TouchableOpacity, View, ViewStyle} from 'react-native';
 import React, {useRef} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Formik} from 'formik';
 import {
@@ -14,6 +14,7 @@ import {
 import {spacing} from '../theme';
 import {get} from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 import {getLoginFormValidationSchema} from '../validations';
+import { RootNavigatorParamList } from '../navigators';
 
 interface LoginFormValues {
   username: string;
@@ -23,7 +24,7 @@ interface LoginFormValues {
 export const LoginScreen = () => {
   const initialFormValues: LoginFormValues = {username: '', password: ''};
   const passwordRef = useRef<TextInput>(null);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootNavigatorParamList>>();
   const {t} = useTranslation();
 
   /**

@@ -1,4 +1,5 @@
 export default{
+    back: 'Back',
     validations: {
         required: "{{fieldName}} is Required",
         email: "Email is invalid",

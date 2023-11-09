@@ -2,7 +2,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ProductsScreen } from "../screens";
 import { ProductDetailsScreen } from "../screens/ProductDetailsScreen";
 
-const Stack = createNativeStackNavigator();
+export type HomeNavigatorParamList = {
+    Products: undefined,
+    ProductDetails: undefined,
+}
+
+const Stack = createNativeStackNavigator<HomeNavigatorParamList>();
 
 export const HomeNavigator = () => {
     return (

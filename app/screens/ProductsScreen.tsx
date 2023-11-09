@@ -2,14 +2,15 @@ import { ViewStyle, FlatList } from 'react-native'
 import React from 'react'
 import { useReduxSelector } from '../redux';
 import { ProductItem, Spacer } from '../components';
-import { spacing } from '../theme';
+import { colors, spacing } from '../theme';
 import { Product } from '../redux/products/types';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { HomeNavigatorParamList, RootNavigatorParamList } from '../navigators';
 
 export const ProductsScreen = () => {
 
   const { getProducts : { products, loading, error}} = useReduxSelector(state => state.products)
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<HomeNavigatorParamList>>()
 
   return (
     <FlatList
@@ -27,4 +28,5 @@ export const ProductsScreen = () => {
 
 const $root : ViewStyle = {
   paddingTop: spacing.sm,
+  backgroundColor: colors.background,
 }

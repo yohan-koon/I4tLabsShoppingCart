@@ -1,17 +1,17 @@
 import { View, ImageStyle as RNImageStyle, StyleProp, Image, ViewStyle } from 'react-native'
 import React, { useState } from 'react'
-import FastImage, { ImageStyle as FastImageProps, ResizeMode } from 'react-native-fast-image'
+import FastImage, { ImageStyle as FIImageStyle, ResizeMode, FastImageProps, Source } from 'react-native-fast-image'
 import { colors } from '../theme';
 
 interface NetworkImageProps extends FastImageProps {
   /**
    * The uri of the image to display
    */
-  source?: string,
+  source?: Source,
   /**
-   * Style override for the image
+   * Style override for the imager
    */
-  style?: StyleProp<FastImageProps>,
+  style?: FIImageStyle,
   /**
    * Resize mode for the image
    */
@@ -25,7 +25,7 @@ export const NetworkImage = (props: NetworkImageProps) => {
     <FastImage
       style={$styleOverride}
       source={{
-        uri: source,
+        ...source,
         priority: FastImage.priority.normal,
       }}
       resizeMode={resizeMode}
@@ -37,7 +37,7 @@ export const NetworkImage = (props: NetworkImageProps) => {
       }}
       {...rest}
     />
-    {(isLoading || (!source || source==='')) && <View style={$placeholderContainerStyle}>
+    {(isLoading || (!source || !source.uri || source.uri === '')) && <View style={$placeholderContainerStyle}>
       <Image source={require('../../assets/images/image-placeholder.png')} style={[$placeholderStyle]}/>
     </View>}
   </View>
