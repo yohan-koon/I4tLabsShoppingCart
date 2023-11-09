@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import FastImage, { ImageStyle as FIImageStyle, ResizeMode, FastImageProps, Source } from 'react-native-fast-image'
 import { colors } from '../theme';
 
+export type PlaceholderTypes = keyof typeof defaultPlaceholderRegistry;
 interface NetworkImageProps extends FastImageProps {
   /**
    * The uri of the image to display
@@ -16,10 +17,14 @@ interface NetworkImageProps extends FastImageProps {
    * Resize mode for the image
    */
   resizeMode?: ResizeMode,
+  /**
+   * Placeholder type
+   */
+  placeholder?: PlaceholderTypes
 }
 
 export const NetworkImage = (props: NetworkImageProps) => {
-  const { source, style: $styleOverride, resizeMode = 'cover', ...rest } = props;
+  const { source, style: $styleOverride, resizeMode = 'cover', placeholder = 'landscape', ...rest } = props;
   const [isLoading, setIsLoading] = useState(true);
   return (<View>
     <FastImage
@@ -37,11 +42,16 @@ export const NetworkImage = (props: NetworkImageProps) => {
       }}
       {...rest}
     />
-    {(isLoading || (!source || !source.uri || source.uri === '')) && <View style={$placeholderContainerStyle}>
-      <Image source={require('../../assets/images/image-placeholder.png')} style={[$placeholderStyle]}/>
+    {(isLoading || (!source || !source.uri || source.uri === '')) && <View style={[$placeholderContainerStyle, $styleOverride]}>
+      <Image source={defaultPlaceholderRegistry[placeholder]} style={[$placeholderStyle]}/>
     </View>}
   </View>
   )
+}
+
+export const defaultPlaceholderRegistry = {
+  user: require('../../assets/images/user-placeholder.png'),
+  landscape: require('../../assets/images/image-placeholder.png')
 }
 
 const $placeholderContainerStyle: ViewStyle = {

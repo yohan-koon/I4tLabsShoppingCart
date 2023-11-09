@@ -8,3 +8,4 @@ export * from './ProductItem';
 export * from './NetworkImage';
 export * from './CartItem';
 export * from './LinkButton';
+export * from './InfoRow';

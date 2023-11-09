@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { AuthStateType, ISignInRequestType, User } from './types'
+import { user } from '../../seeds/user'
 
 const initialState: AuthStateType = {
   signIn: {
-    user: null,
+    user: user,
     loading: 'idle',
     error: '',
   }
