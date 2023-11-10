@@ -18,10 +18,14 @@ interface CartItemProps {
      * on delete handler
      */
     onDelete: (cartItem: CartItemType) => void;
+    /**
+     * Disable delete button
+     */
+    disableDelete?: boolean;
 }
 
 export const CartItem = (props: CartItemProps) => {
-    const { cartItem, onDelete } = props;
+    const { cartItem, onDelete, disableDelete } = props;
 
     /**
      * Memoized price
@@ -42,7 +46,8 @@ export const CartItem = (props: CartItemProps) => {
                         <LinkButton
                             tx="cartItem:delete"
                             onPress={() => onDelete(cartItem)}
-                            preset='danger' />
+                            preset='danger'
+                            disabled={disableDelete} />
                     </View>
                 </View>
             </View>
