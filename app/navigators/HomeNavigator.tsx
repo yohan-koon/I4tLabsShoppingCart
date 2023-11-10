@@ -4,7 +4,7 @@ import { ProductDetailsScreen } from "../screens/ProductDetailsScreen";
 
 export type HomeNavigatorParamList = {
     Products: undefined,
-    ProductDetails: undefined,
+    ProductDetails: {productId?: number},
 }
 
 const Stack = createNativeStackNavigator<HomeNavigatorParamList>();

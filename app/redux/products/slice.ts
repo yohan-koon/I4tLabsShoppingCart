@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { ProductsPaginatedResponse, ProductsStateType } from './types'
+import { Product, ProductsPaginatedResponse, ProductsStateType } from './types'
 import { productsSeed } from '../../seeds/products'
 import { PaginationConfig } from '../../types'
 
@@ -15,7 +15,7 @@ const initialState: ProductsStateType = {
         total: 0,
     },
     getProductById: {
-        product: productsSeed[0],
+        product: null,
         loading: 'idle',
         error: '',
     }
@@ -43,10 +43,23 @@ export const productsSlice = createSlice({
         resetGetProductsAction: (state: ProductsStateType, action: PayloadAction<PaginationConfig>) => {
             state.getProducts = initialState.getProducts;
         },
+        getProductByIdAction: (state: ProductsStateType, action: PayloadAction<number>) => {
+            state.getProductById.loading = 'loading';
+            state.getProductById.error = '';
+            state.getProductById.product = null;
+        },
+        getProductByIdSuccessAction: (state: ProductsStateType, action: PayloadAction<Product>) => {
+            state.getProductById.loading = 'idle';
+            state.getProductById.product = action.payload;
+        },
+        getProductByIdFailureAction: (state: ProductsStateType, action: PayloadAction<string>) => {
+            state.getProductById.loading = 'idle';
+            state.getProductById.error = action.payload;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { getProductsAction, getProductsSuccessAction, getProductsFailureAction, resetGetProductsAction} = productsSlice.actions
+export const { getProductsAction, getProductsSuccessAction, getProductsFailureAction, resetGetProductsAction, getProductByIdAction, getProductByIdSuccessAction, getProductByIdFailureAction} = productsSlice.actions
 
 export default productsSlice.reducer

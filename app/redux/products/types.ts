@@ -51,5 +51,5 @@ export type GET_PRODUCTS = typeof GET_PRODUCTS;
 export const RESET_GET_PRODUCTS = `${PRODUCTS}/resetGetProductsAction`;
 export type RESET_GET_PRODUCTS = typeof RESET_GET_PRODUCTS;
 
-export const GET_PRODUCT_BY_ID = `${PRODUCTS}/get-product-by-id`;
+export const GET_PRODUCT_BY_ID = `${PRODUCTS}/getProductByIdAction`;
 export type GET_PRODUCT_BY_ID = typeof GET_PRODUCT_BY_ID;

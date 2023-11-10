@@ -1,13 +1,12 @@
 import { View, ViewStyle } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Carousel from 'react-native-snap-carousel';
 import { AirbnbRating } from 'react-native-ratings';
 import Slider from '@react-native-community/slider';
-import { useReduxSelector } from '../redux';
-import { ms } from '../utils';
+import { addToCartAction, getProductByIdAction, useReduxDispatch, useReduxSelector } from '../redux';
+import { displayMessage, ms } from '../utils';
 import {
   Button,
-  ButtonProps,
   Icon,
   NetworkImage,
   Screen,
@@ -16,30 +15,97 @@ import {
 } from '../components';
 import { ImageStyle } from 'react-native-fast-image';
 import { colors, spacing } from '../theme';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { HomeNavigatorParamList } from '../navigators';
+import { NavigationProp, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { HomeNavigatorParamList, MainNavigatorParamList } from '../navigators';
 import { Product } from '../redux/products/types';
+import { useTranslation } from 'react-i18next';
+import { ProductsDetailsScreenSkeleton } from './ProductDetailsScree.Skeleton';
+import { CartItemType, getCartItemAction, resetAddToCartAction } from '../redux/cart';
 
 export const ProductDetailsScreen = () => {
   const carouselRef = React.useRef(null);
-  const navigation = useNavigation<NavigationProp<HomeNavigatorParamList>>();
+  const dispatch = useReduxDispatch();
+  const homeNavigation = useNavigation<NavigationProp<HomeNavigatorParamList>>();
+  const cartNavigation = useNavigation<NavigationProp<MainNavigatorParamList>>();
+  const { t } = useTranslation();
+  const route = useRoute<RouteProp<HomeNavigatorParamList, 'ProductDetails'>>();
+  const { productId } = route.params;
   const {
-    getProductById: { product },
+    getProductById: { product, loading: getProductByIdLoading, error: getProductByIdError }
   } = useReduxSelector(state => state.products);
+  const {
+    addToCart: { loading: addToCartLoading, error: addToCartError },
+    getCartItem: {loading: getCartItemLoading, error: getCartItemError, data: cartItemData}
+  } = useReduxSelector(state => state.cart);
   const [quantity, setQuantity] = React.useState<number>(1);
+
+  /**
+   * useEffect hook to dispatch get product by id action when productId changes
+   */
+  useEffect(() => {
+    if (!productId) return displayMessage(t('productDetailsScreen:productIdNotFound'));
+    //Dispatch get product by id action
+    dispatch(getProductByIdAction(productId))
+    //Dispatch get cart item action
+    dispatch(getCartItemAction(productId))
+  }, [
+    productId
+  ]);
+
+  /**
+   * useEffect hook to handle loading, error and data for get product by id
+   */
+  useEffect(() => {
+    if (getProductByIdLoading === 'loading') return;
+    if (getProductByIdError) { return displayMessage(getProductByIdError); }
+  }, [getProductByIdLoading, getProductByIdError])
+
+  /**
+   * useEffect hook to handle loading, error and data for add to cart
+   */
+  useEffect(() => {
+    if (addToCartLoading === 'loading') return;
+    if (addToCartError) { return displayMessage(addToCartError); }
+    if (addToCartLoading === 'succeeded') {
+      dispatch(resetAddToCartAction())
+      homeNavigation.goBack();
+      cartNavigation.navigate('CartNav')
+    };
+  }, [addToCartLoading, addToCartError]);
+
+  /**
+   * useEffect hook to handle loading, error and data for get cart item
+   */
+  useEffect(() => {
+    if (getCartItemLoading === 'loading') return;
+    if (getCartItemError) { return displayMessage(getCartItemError); }
+    if (getCartItemLoading === 'succeeded') {setQuantity(cartItemData?.quantity || 1)};
+  },[getCartItemLoading, getCartItemError, cartItemData])
+
+  const getCartItem = useCallback((product?: Product | null): CartItemType => {
+    if(!product) return {} as CartItemType;
+    return {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      quantity: quantity,
+      thumbnail: product.thumbnail,
+      discountPercentage: product.discountPercentage,
+    }
+  }, [quantity, product]);
 
   const renderButton = useCallback(() => {
     return (<Button
       tx="productDetailsScreen:addToCart"
       txOptions={{ quantity }}
       style={$addToCart}
-      onPress={() => navigation.goBack()}
+      onPress={() => dispatch(addToCartAction(getCartItem(product)))}
+      loading={addToCartLoading === 'loading'}
     />)
-  }, [quantity])
+  }, [quantity, addToCartLoading, product])
 
-  return (
-    <Screen preset="auto" contentContainerStyle={$root}>
-      <Spacer mainAxisSize={spacing.xl} />
+  const renderContainer = () => {
+    return (<>
       <View style={$carouselConatiner}>
         <Icon
           icon="prev"
@@ -49,17 +115,17 @@ export const ProductDetailsScreen = () => {
           }}
         />
 
-        <Carousel
+        {product?.images && <Carousel
           ref={carouselRef}
           data={product?.images}
           renderItem={({ item }) => (
-            <NetworkImage source={{uri: item}} style={$sliderItem} />
+            <NetworkImage source={{ uri: item }} style={$sliderItem} />
           )}
           sliderWidth={ms(375 - 80)}
           itemWidth={ms(375 - 80)}
           layout={'default'}
           loop={true}
-        />
+        />}
 
         <Icon
           icon="next"
@@ -112,7 +178,17 @@ export const ProductDetailsScreen = () => {
           </View>
         </View>
       </View>
-      {renderButton()}
+      {renderButton()}</>)
+  }
+
+  const renderSkeletonContainer = () => {
+    return <ProductsDetailsScreenSkeleton />
+  }
+
+  return (
+    <Screen preset="auto" contentContainerStyle={$root}>
+      <Spacer mainAxisSize={spacing.xl} />
+      {product ? renderContainer() : renderSkeletonContainer()}
       <Spacer mainAxisSize={spacing.md} />
     </Screen>
   );
