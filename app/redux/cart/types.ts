@@ -31,11 +31,17 @@ export type IRemoveFromCartType = {
     error: string;
 }
 
+export type ICheckoutType = {
+    loading: LoadingType;
+    error: string;
+}
+
 export type CartStateType = {
     addToCart: IAddToCartType;
     getCartItems: IGetCartItemsType;
     getCartItem: IGetCartItemType;
     removeFromCart: IRemoveFromCartType;
+    checkout: ICheckoutType;
 }
 
 export const CART = "cart";
@@ -52,3 +58,6 @@ export type REMOVE_FROM_CART = typeof REMOVE_FROM_CART;
 
 export const GET_CART_ITEM = `${CART}/getCartItemAction`;
 export type GET_CART_ITEM = typeof GET_CART_ITEM;
+
+export const CHECKOUT = `${CART}/checkoutAction`;
+export type CHECKOUT = typeof CHECKOUT;

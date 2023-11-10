@@ -18,7 +18,6 @@ export type IGetProductsType = {
     products: Product[];
     loading: LoadingType;
     error: string;
-    currentPage: number;
     limit: number;
     skip: number;
     total: number;

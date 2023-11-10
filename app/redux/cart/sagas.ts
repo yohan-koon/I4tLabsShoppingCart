@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { ADD_TO_CART, CartItemType, GET_CART_ITEM, GET_CART_ITEMS, REMOVE_FROM_CART } from "./types";
-import { loadCartItemById, loadCartItems, removeItemFromCart, saveCartItem } from "../../datasources";
+import { ADD_TO_CART, CHECKOUT, CartItemType, GET_CART_ITEM, GET_CART_ITEMS, REMOVE_FROM_CART } from "./types";
+import { checkoutAndClear, loadCartItemById, loadCartItems, removeItemFromCart, saveCartItem } from "../../datasources";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { addToCartFailureAction, addToCartSuccessAction, getCartItemFailureAction, getCartItemSuccessAction, getCartItemsFailureAction, getCartItemsSuccessAction, removeFromCartFailureAction, removeFromCartSuccessAction } from "./slice";
+import { addToCartFailureAction, addToCartSuccessAction, checkoutFailureAction, checkoutSuccessAction, getCartItemFailureAction, getCartItemSuccessAction, getCartItemsFailureAction, getCartItemsSuccessAction, removeFromCartFailureAction, removeFromCartSuccessAction } from "./slice";
 
 /**
  * Saga for add to cart
@@ -93,4 +93,28 @@ function* removeFromCart(action: PayloadAction<number>) {
  */
 export function* watchRemoveFromCartSaga() {
     yield takeLatest(REMOVE_FROM_CART, removeFromCart);
+}
+
+/**
+ * Saga for checkout
+ */
+function* checkout() {
+    try {
+        const isChckout: boolean = yield call(checkoutAndClear)
+
+        if (!isChckout) {
+            yield put(checkoutFailureAction('Failed to checkout'));
+        }
+        //Dispatch success action
+        yield put(checkoutSuccessAction());
+    } catch (error: any) {
+        //Dispatch failure action
+        yield put(checkoutFailureAction(error.message));
+    }}
+
+/**
+ * Watcher saga for checkout
+ */
+export function* watchCheckoutSaga() {
+    yield takeLatest(CHECKOUT, checkout);
 }

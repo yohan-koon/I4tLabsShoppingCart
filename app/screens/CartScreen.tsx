@@ -18,7 +18,7 @@ export const CartScreen = () => {
     getCartItems: {
       loading: getCartItemsLoading,
       error: getCartItemsError,
-      list,
+      list: getCartItemsList,
     },
     removeFromCart: {loading: removeFromCartLoading, error: removeFromCartError},
   } = useReduxSelector(state => state.cart);
@@ -38,7 +38,7 @@ export const CartScreen = () => {
     if (getCartItemsError) {
       return displayMessage(getCartItemsError);
     }
-    if (list.length === 0) {
+    if (getCartItemsLoading === 'succeeded' && getCartItemsList.length === 0) {
       displayMessage(t('cartScreen:noItems'), undefined, 'info');
     }
   }, [getCartItemsLoading, getCartItemsError]);
@@ -66,7 +66,7 @@ export const CartScreen = () => {
         <Spacer mainAxisSize={spacing.md} />
         <View style={$cartListContainer}>
           <FlatList
-            data={list}
+            data={getCartItemsList}
             renderItem={({item}) => (
               <CartItem
                 cartItem={item}
@@ -87,7 +87,7 @@ export const CartScreen = () => {
           style={$checkoutButton}
           tx="cartScreen:checkout"
           onPress={() => navigation.navigate('Checkout')}
-          disabled={list.length === 0 || removeFromCartLoading === 'loading'}
+          disabled={getCartItemsList.length === 0 || removeFromCartLoading === 'loading'}
           loading={removeFromCartLoading === 'loading'}
         />
         <Spacer mainAxisSize={spacing.md} />

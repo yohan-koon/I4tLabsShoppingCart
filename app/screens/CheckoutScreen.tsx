@@ -1,31 +1,48 @@
 import { ViewStyle, View, TextStyle } from 'react-native'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { RadioGroup, RadioButtonProps } from 'react-native-radio-buttons-group'
 import { Screen, Spacer, Button, Text } from '../components'
 import { spacing } from '../theme'
-import { useReduxSelector } from '../redux'
+import { checkoutAction, useReduxDispatch, useReduxSelector } from '../redux'
+import { displayMessage } from '../utils'
+import { useTranslation } from 'react-i18next'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { MainNavigatorParamList } from '../navigators'
 
 export const CheckoutScreen = () => {
-    const { cartItems } = useReduxSelector(state => state.cart)
+    const dispatch  = useReduxDispatch()
+    const {t} = useTranslation();
+    const navigation = useNavigation<NavigationProp<MainNavigatorParamList>>();
+    const { getCartItems: {loading: getCartItemsLoading, error: getCartItemsError, list}, checkout: {loading: checkoutLoading, error: checkoutError} } = useReduxSelector(state => state.cart)
 
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | undefined>('1');
 
+    /**
+     * useEffect hook to handle chekcout
+     */
+    useEffect(() => {
+        if (checkoutLoading === 'loading') return;
+        if (checkoutError) { return displayMessage(checkoutError); }
+        if (checkoutLoading === 'succeeded') {
+            displayMessage(t('checkoutScreen:checkoutSuccess'), undefined, 'success');
+        }
+        if(list.length === 0) {
+            navigation.goBack();
+            navigation.navigate('HomeNav')
+        }
+    }, [checkoutLoading, checkoutError, list])
+
     const total = useMemo(() => {
-        return cartItems.reduce((acc, item) => {
+        return list.reduce((acc, item) => {
             return acc + item.price * item.quantity
         }, 0)
-    }, [cartItems])
+    }, [list])
 
     const paymentMethods : RadioButtonProps[] = useMemo(() => ([
         {
             id: '1',
             label: 'Cash on Delivery',
             value: 'cashOnDelivery'
-        },
-        {
-            id: '2',
-            label: 'Visa/Mastercard',
-            value: 'card'
         }
     ]), []);
 
@@ -50,7 +67,9 @@ export const CheckoutScreen = () => {
             <Button
                 style={$checkoutButton}
                 tx="checkoutScreen:checkout"
-                onPress={() => { }}
+                onPress={() => dispatch(checkoutAction())}
+                loading={checkoutLoading === 'loading'}
+                disabled={checkoutLoading === 'loading'}
             />
             <Spacer mainAxisSize={spacing.md} />
         </Screen>

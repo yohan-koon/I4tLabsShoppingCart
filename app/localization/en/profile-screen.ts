@@ -7,4 +7,5 @@ export default{
     workAsA: 'Work as a',
     logout: 'Logout',
     notFound: 'Not found',
+    logoutSuccess: 'User logged out successfully',
 }

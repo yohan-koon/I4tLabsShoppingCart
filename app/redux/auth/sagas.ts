@@ -1,9 +1,9 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { call, put, takeLatest } from "redux-saga/effects";
-import { ISignInRequestPayload, LOAD_EXISTING_USER, SIGN_IN, SIGN_OUT, User } from "./types";
-import { loadExistingUserFailureAction, loadExistingUserSuccessAction, signInFailureAction, signInSuccessAction, signOutFailureAction, signOutSuccessAction } from "./slice";
-import { clearUser, getUser, saveUser, signIn } from "../../datasources";
+import { GET_USER_BY_ID, ISignInRequestPayload, LOAD_EXISTING_USER, SIGN_IN, SIGN_OUT, User } from "./types";
+import { getUserByIdFailureAction, getUserByIdSuccessAction, loadExistingUserFailureAction, loadExistingUserSuccessAction, signInFailureAction, signInSuccessAction, signOutFailureAction, signOutSuccessAction } from "./slice";
+import { clearUser, getUser, getUserById, saveUser, signIn } from "../../datasources";
 import { load } from "../../utils";
 
 /**
@@ -89,4 +89,31 @@ function* signOutSaga() {
  */
 export function* watchSignOutSaga() {
     yield takeLatest(SIGN_OUT, signOutSaga);
+}
+
+/**
+ * Saga for get user by id
+ */
+function* getUserByIdSaga(action: PayloadAction<number>) {
+    try {
+        //Load user from local storage
+        const user: User = yield call(getUserById, action.payload);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        //Dispatch success action
+        yield put(getUserByIdSuccessAction(user));
+    } catch (error: any) {
+        //Dispatch failure action
+        yield put(getUserByIdFailureAction(error.message));
+    }
+}
+
+/**
+ * Watcher saga for get user by id
+ */
+export function* watchGetUserByIdSaga() {
+    yield takeLatest(GET_USER_BY_ID, getUserByIdSaga);
 }
