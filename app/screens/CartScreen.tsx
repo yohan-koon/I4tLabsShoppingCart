@@ -9,13 +9,16 @@ import { CartNavigatorParamList } from '../navigators'
 
 export const CartScreen = () => {
   const navigation = useNavigation<NavigationProp<CartNavigatorParamList>>(); 
-  const {cartItems} = useReduxSelector(state => state.cart)
+  const {getCartItems: {loading: getCartItemsLoading, error: getCartItemsError, list}} = useReduxSelector(state => state.cart)
+
+
+
   return (
     <View style={$root}>
       <Spacer mainAxisSize={spacing.md} />
       <View style={$cartListContainer}>
       <FlatList
-        data={cartItems}
+        data={list}
         renderItem={({item}) => <CartItem cartItem={item} onDelete={(product: CartItemType) => {}}/>}
         keyExtractor={item => item.id.toString()}
         initialNumToRender={10}

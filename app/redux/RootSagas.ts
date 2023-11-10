@@ -1,6 +1,7 @@
 import { all, fork } from "redux-saga/effects";
 import { watchLoadExistingUserSaga, watchSignInSaga, watchSignOutSaga } from "./auth";
-import { watchGetAllProductsSaga, watchResetGetProductsSaga } from "./products";
+import { watchGetAllProductsSaga, watchGetProductByIdSaga, watchResetGetProductsSaga } from "./products";
+import { watchAddToCartSaga, watchGetCartItemSaga } from "./cart";
 
 const rootSaga = function* () {
 
@@ -12,7 +13,10 @@ const rootSaga = function* () {
     //Product sagas
     fork(watchGetAllProductsSaga),
     fork(watchResetGetProductsSaga),
+    fork(watchGetProductByIdSaga),
     //Cart sagas
+    fork(watchAddToCartSaga),
+    fork(watchGetCartItemSaga)
   ]);
   
 };

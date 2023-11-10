@@ -38,7 +38,7 @@ export const ProductsScreen = () => {
   return (
     <FlatList
       data={products}
-      renderItem={({ item }) => <ProductItem product={item} onPress={(product: Product) => navigation.navigate('ProductDetails')} />}
+      renderItem={({ item }) => <ProductItem product={item} onPress={(product: Product) => navigation.navigate('ProductDetails', {productId: product.id})} />}
       keyExtractor={item => item.id.toString()}
       initialNumToRender={10}
       maxToRenderPerBatch={10}

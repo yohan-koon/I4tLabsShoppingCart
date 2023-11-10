@@ -113,7 +113,7 @@ export const Button = (props: ButtonProps) => {
   }
 
   return (
-    <Pressable style={$viewStyle} accessibilityRole="button" {...rest}>
+    <Pressable style={$viewStyle} accessibilityRole="button" disabled={loading} {...rest}>
       {(state) => (
         <>
           {!!LeftAccessory && <LeftAccessory style={$leftAccessoryStyle} pressableState={state} />}
