@@ -9,6 +9,11 @@ const initialState: AuthStateType = {
     loading: 'idle',
     error: '',
   },
+  fullUser: {
+    data: null,
+    loading: 'idle',
+    error: '',
+  },
 };
 
 export const authSlice = createSlice({
@@ -68,8 +73,27 @@ export const authSlice = createSlice({
     ) => {
       state.user.loading = 'idle';
       state.user.error = action.payload;
-
     },
+    getUserByIdAction: (state: AuthStateType, action: PayloadAction<number>) => {
+      state.fullUser.loading = 'loading';
+      state.fullUser.error = '';
+    },
+    getUserByIdSuccessAction: (state: AuthStateType, action: PayloadAction<User>) => {
+      state.fullUser.loading = 'idle';
+      state.fullUser.data = action.payload;
+    },
+    getUserByIdFailureAction: (
+      state: AuthStateType,
+      action: PayloadAction<string>,
+    ) => {
+      state.fullUser.loading = 'idle';
+      state.fullUser.error = action.payload;
+    },
+    resetAuthStateAction: (state: AuthStateType) => {
+      state.user = initialState.user;
+      state.fullUser = initialState.fullUser;
+    },
+
   },
 });
 
@@ -84,6 +108,10 @@ export const {
   signOutAction,
   signOutSuccessAction,
   signOutFailureAction,
+  getUserByIdAction,
+  getUserByIdSuccessAction,
+  getUserByIdFailureAction,
+  resetAuthStateAction
 } = authSlice.actions;
 
 export default authSlice.reducer;

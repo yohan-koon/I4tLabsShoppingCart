@@ -1,5 +1,5 @@
 import { CartItemType } from "../../redux/cart";
-import { load, save } from "../../utils";
+import { clear, load, save } from "../../utils";
 
 export const saveCartItem = async (cartItem: CartItemType) => {
     //Get the cart from local storage
@@ -84,6 +84,13 @@ export const removeItemFromCart = async (cartItemId: number) : Promise<CartItemT
     return cart;
 }
 
-export const checkout = () => {
+export const checkoutAndClear = async () : Promise<boolean> => {
+    //Clear the cart from local storage
+    const isCleared = await save('CART', []);
 
+    if(!isCleared){
+        throw new Error('Failed to clear the cart');
+    }
+
+    return isCleared;
 }
