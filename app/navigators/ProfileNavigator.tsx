@@ -9,11 +9,11 @@ export type ProfileNavigatorParamList = {
 const Stack = createNativeStackNavigator<ProfileNavigatorParamList>();
 
 export const ProfileNavigator = () => {
-    const {signIn: {user}} = useReduxSelector(state => state.auth);
+    const {user: {data}} = useReduxSelector(state => state.auth);
     return (
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={ProfileScreen} options={{
-                headerTitle: `${user?.firstName} ${user?.lastName}`
+                headerTitle: `${data?.firstName} ${data?.lastName}`
             }}/>
         </Stack.Navigator>
     )

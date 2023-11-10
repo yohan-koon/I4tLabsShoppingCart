@@ -16,8 +16,8 @@ import {
   ViewStyle,
 } from "react-native"
 import { colors } from "../theme"
-import Spinner from 'react-native-loading-spinner-overlay';
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
+import {Spinner} from './Spinner';
 
 interface BaseScreenProps {
   /**
@@ -224,11 +224,9 @@ export function Screen(props: ScreenProps) {
           <ScreenWithScrolling {...props} />
         )}
       </KeyboardAvoidingView>
-      <Spinner
-          visible={isVisibleSpinner}
-          textContent={'Loading...'}
-          // textStyle={styles.spinnerTextStyle}
-        />
+      {/* <Spinner
+          isVisible={isVisibleSpinner}
+        /> */}
     </View>
   )
 }

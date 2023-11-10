@@ -6,10 +6,12 @@ import {
   StyleProp,
   TextStyle,
   ViewStyle,
+  ActivityIndicator
 } from "react-native"
 import { colors, spacing, typography } from "../theme"
 import { Text, TextProps } from "./Text"
 import { ms, vs } from "../utils"
+import { Spacer } from "./Spacer"
 
 type Presets = keyof typeof $viewPresets
 
@@ -63,6 +65,10 @@ export interface ButtonProps extends PressableProps {
    */
   LeftAccessory?: ComponentType<ButtonAccessoryProps>
   /**
+   * loading state
+   */
+  loading?: boolean
+  /**
    * Children components.
    */
   children?: React.ReactNode
@@ -86,6 +92,7 @@ export const Button = (props: ButtonProps) => {
     children,
     RightAccessory,
     LeftAccessory,
+    loading,
     ...rest
   } = props
 
@@ -111,9 +118,14 @@ export const Button = (props: ButtonProps) => {
         <>
           {!!LeftAccessory && <LeftAccessory style={$leftAccessoryStyle} pressableState={state} />}
 
-          <Text tx={tx} text={text} txOptions={txOptions} style={$textStyle(state)}>
+          {loading ? <Text tx={'common:loading'} style={$textStyle(state)}/> :<Text tx={tx} text={text} txOptions={txOptions} style={$textStyle(state)}>
             {children}
-          </Text>
+          </Text>}
+
+          {loading && <>
+            <Spacer crossAxisSize={spacing.xs} />
+            <ActivityIndicator size="small" color={colors.palette.neutral100}  />
+          </>}
 
           {!!RightAccessory && (
             <RightAccessory style={$rightAccessoryStyle} pressableState={state} />

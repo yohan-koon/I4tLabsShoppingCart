@@ -163,3 +163,4 @@ const $sliderContainer: ViewStyle = {
 const $addToCart: ViewStyle = {
   marginHorizontal: spacing.xl,
 };
+

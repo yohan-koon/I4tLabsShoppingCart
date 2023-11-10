@@ -1,13 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { Product, ProductsStateType } from './types'
+import { ProductsPaginatedResponse, ProductsStateType } from './types'
 import { productsSeed } from '../../seeds/products'
+import { PaginationConfig } from '../../types'
 
 const initialState: ProductsStateType = {
     getProducts: {
-        products: productsSeed,
+        products: [],
         loading: 'idle',
         error: '',
+        currentPage: 0,
+        limit: 0,
+        skip: 0,
+        total: 0,
     },
     getProductById: {
         product: productsSeed[0],
@@ -20,19 +25,28 @@ export const productsSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        getProductsAction: (state: ProductsStateType, { payload }: PayloadAction<any>) => {
-
+        getProductsAction: (state: ProductsStateType, action: PayloadAction<PaginationConfig>) => {
+            state.getProducts.loading = 'loading';
+            state.getProducts.error = '';
         },
-        getProductsSuccessAction: (state: ProductsStateType, { payload: { products } }: PayloadAction<{ products: Product[] }>) => {
-
+        getProductsSuccessAction: (state: ProductsStateType, action: PayloadAction<ProductsPaginatedResponse>) => {
+            state.getProducts.loading = 'idle';
+            state.getProducts.products = action.payload.products;
+            state.getProducts.limit = action.payload.limit;
+            state.getProducts.skip = action.payload.skip;
+            state.getProducts.total = action.payload.total;
         },
-        getProductsFailureAction: (state: ProductsStateType, { payload: { error } }: PayloadAction<{ error: string }>) => {
-
-        }
+        getProductsFailureAction: (state: ProductsStateType, action: PayloadAction<string>) => {
+            state.getProducts.loading = 'idle';
+            state.getProducts.error = action.payload;
+        },
+        resetGetProductsAction: (state: ProductsStateType, action: PayloadAction<PaginationConfig>) => {
+            state.getProducts = initialState.getProducts;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { getProductsAction, getProductsSuccessAction, getProductsFailureAction } = productsSlice.actions
+export const { getProductsAction, getProductsSuccessAction, getProductsFailureAction, resetGetProductsAction} = productsSlice.actions
 
 export default productsSlice.reducer

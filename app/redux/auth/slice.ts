@@ -1,33 +1,89 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { AuthStateType, ISignInRequestType, User } from './types'
-import { user } from '../../seeds/user'
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { AuthStateType, ISignInRequestPayload, User } from './types';
+import { user } from '../../seeds/user';
 
 const initialState: AuthStateType = {
-  signIn: {
-    user: user,
+  user: {
+    data: null,
     loading: 'idle',
     error: '',
-  }
-}
+  },
+};
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signInAction: (state: AuthStateType, {payload: {username, password}}: PayloadAction<ISignInRequestType>) => {
+    signInAction: (
+      state: AuthStateType,
+      action: PayloadAction<ISignInRequestPayload>,
+    ) => {
+      state.user.loading = 'loading';
+      state.user.error = '';
+    },
+    signInSuccessAction: (
+      state: AuthStateType,
+      action: PayloadAction<User>,
+    ) => {
+      state.user.loading = 'idle';
+      state.user.data = action.payload;
+    },
+    signInFailureAction: (
+      state: AuthStateType,
+      action: PayloadAction<string>,
+    ) => {
+      state.user.loading = 'idle';
+      state.user.error = action.payload;
+    },
+    loadExistingUserAction: (state: AuthStateType) => {
+      state.user.loading = 'loading';
+      state.user.error = '';
+    },
+    loadExistingUserSuccessAction: (
+      state: AuthStateType,
+      action: PayloadAction<User>,
+    ) => {
+      state.user.data = action.payload;
+      state.user.loading = 'idle';
+    },
+    loadExistingUserFailureAction: (
+      state: AuthStateType,
+      action: PayloadAction<string>,
+    ) => {
+      state.user.loading = 'idle';
+      state.user.error = ''
+    },
+    signOutAction: (state: AuthStateType) => {
+      state.user.loading = 'loading';
+      state.user.error = '';
+    },
+    signOutSuccessAction: (state: AuthStateType) => {
+      state.user.loading = 'idle';
+      state.user.data = null;
+    },
+    signOutFailureAction: (
+      state: AuthStateType,
+      action: PayloadAction<string>,
+    ) => {
+      state.user.loading = 'idle';
+      state.user.error = action.payload;
 
     },
-    signInSuccessAction: (state: AuthStateType, {payload: {user}}: PayloadAction<{user: User}>) => {
-
-    },
-    signInFailureAction: (state: AuthStateType, {payload: {error}}: PayloadAction<{error: string}>) => {
-
-    }
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { signInAction, signInSuccessAction, signInFailureAction } = authSlice.actions
+export const {
+  signInAction,
+  signInSuccessAction,
+  signInFailureAction,
+  loadExistingUserAction,
+  loadExistingUserSuccessAction,
+  loadExistingUserFailureAction,
+  signOutAction,
+  signOutSuccessAction,
+  signOutFailureAction,
+} = authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;
