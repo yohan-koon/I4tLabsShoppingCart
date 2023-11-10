@@ -1,8 +1,8 @@
-import {TextInput, TouchableOpacity, View, ViewStyle} from 'react-native';
-import React, {useRef} from 'react';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {useTranslation} from 'react-i18next';
-import {Formik} from 'formik';
+import { TextInput, View, ViewStyle } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
+import { Formik } from 'formik';
 import {
   Button,
   Screen,
@@ -11,10 +11,11 @@ import {
   TextField,
   TextFieldProps,
 } from '../components';
-import {spacing} from '../theme';
-import {get} from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
-import {getLoginFormValidationSchema} from '../validations';
+import { spacing } from '../theme';
+import { getLoginFormValidationSchema } from '../validations';
 import { RootNavigatorParamList } from '../navigators';
+import { loadExistingUserAction, signInAction, useReduxDispatch, useReduxSelector } from '../redux';
+import { displayMessage } from '../utils';
 
 interface LoginFormValues {
   username: string;
@@ -22,10 +23,30 @@ interface LoginFormValues {
 }
 
 export const LoginScreen = () => {
-  const initialFormValues: LoginFormValues = {username: '', password: ''};
+  const initialFormValues: LoginFormValues = { username: '', password: '' };
+  const { user: { loading, error, data } } = useReduxSelector(state => state.auth);
   const passwordRef = useRef<TextInput>(null);
   const navigation = useNavigation<NavigationProp<RootNavigatorParamList>>();
-  const {t} = useTranslation();
+  const dispatch = useReduxDispatch();
+  const { t } = useTranslation();
+
+
+  /**
+   * load stored user data from async storage
+   */
+  useEffect(() => {
+    if (!data) {
+      dispatch(loadExistingUserAction())
+    }
+  }, []);
+
+  /**
+   * useEffect hook to handle loading, error and data for login
+   */
+  useEffect(() => {
+    if (loading === 'loading') return;
+    if (error) { return displayMessage(error); }
+  }, [loading, error]);
 
   /**
    * Renders form of the screen
@@ -35,7 +56,7 @@ export const LoginScreen = () => {
     return (
       <Formik
         initialValues={initialFormValues}
-        onSubmit={values => console.log(values)}
+        onSubmit={(values) => { dispatch(signInAction({ username: values.username, password: values.password })) }}
         validationSchema={getLoginFormValidationSchema(t)}>
         {({
           handleChange,
@@ -62,6 +83,7 @@ export const LoginScreen = () => {
                   ? errors.username
                   : undefined
               }
+              editable={loading !== 'loading'}
             />
             <Spacer mainAxisSize={spacing.lg} />
             <TextField
@@ -81,12 +103,13 @@ export const LoginScreen = () => {
                   ? errors.password
                   : undefined
               }
+              editable={loading !== 'loading'}
             />
             <Spacer mainAxisSize={spacing.xxl} />
             <Button
               tx="loginScreen:loginButton"
-              // onPress={() => handleSubmit()}
-              onPress={() => navigation.navigate('MainNav')}
+              onPress={() => handleSubmit()}
+              loading={loading === 'loading'}
             />
           </View>
         )}
@@ -109,7 +132,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Screen style={$root} contentContainerStyle={$contentContainer}>
+    <Screen style={$root} contentContainerStyle={$contentContainer} safeAreaEdges={['bottom']}>
       {renderContent()}
     </Screen>
   );
