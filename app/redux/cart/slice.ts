@@ -16,7 +16,11 @@ const initialState: CartStateType = {
         data: null,
         loading: 'idle',
         error: '',
-    }
+    },
+    removeFromCart: {
+        loading: 'idle',
+        error: '',
+    },
 }
 
 export const cartSlice = createSlice({
@@ -63,10 +67,22 @@ export const cartSlice = createSlice({
             state.getCartItem.loading = 'idle';
             state.getCartItem.error = action.payload;
         },
+        removeFromCartAction: (state: CartStateType, action: PayloadAction<number>) => {
+            state.removeFromCart.loading = 'loading';
+            state.removeFromCart.error = '';
+        },
+        removeFromCartSuccessAction: (state: CartStateType, action: PayloadAction<CartItemType[]>) => {
+            state.removeFromCart.loading = 'succeeded';
+            state.getCartItems.list = action.payload;
+        },
+        removeFromCartFailureAction: (state: CartStateType, action: PayloadAction<string>) => {
+            state.removeFromCart.loading = 'idle';
+            state.removeFromCart.error = action.payload;
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { getCartItemsAction, getCartItemsSuccessAction, getCartItemsFailureAction, addToCartAction, addToCartSuccessAction, addToCartFailureAction, resetAddToCartAction, getCartItemAction, getCartItemSuccessAction, getCartItemFailureAction } = cartSlice.actions
+export const { getCartItemsAction, getCartItemsSuccessAction, getCartItemsFailureAction, addToCartAction, addToCartSuccessAction, addToCartFailureAction, resetAddToCartAction, getCartItemAction, getCartItemSuccessAction, getCartItemFailureAction, removeFromCartAction, removeFromCartSuccessAction, removeFromCartFailureAction } = cartSlice.actions
 
 export default cartSlice.reducer

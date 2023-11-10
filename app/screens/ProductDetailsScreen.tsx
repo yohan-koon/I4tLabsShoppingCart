@@ -173,6 +173,7 @@ export const ProductDetailsScreen = () => {
               thumbTintColor={colors.palette.primary900}
               onValueChange={value => setQuantity(value)}
               value={quantity}
+              disabled={addToCartLoading === 'loading'}
             />
             <Text text="10" preset="h5" />
           </View>

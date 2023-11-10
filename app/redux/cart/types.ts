@@ -26,10 +26,16 @@ export type IGetCartItemType = {
     error: string;
 }
 
+export type IRemoveFromCartType = {
+    loading: LoadingType;
+    error: string;
+}
+
 export type CartStateType = {
     addToCart: IAddToCartType;
     getCartItems: IGetCartItemsType;
     getCartItem: IGetCartItemType;
+    removeFromCart: IRemoveFromCartType;
 }
 
 export const CART = "cart";
